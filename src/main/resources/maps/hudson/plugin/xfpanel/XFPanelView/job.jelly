@@ -124,8 +124,8 @@
         </a>
         <div id="div-4" style="">
             <!--div style="margin:5px;background:#aaa;border-radius:40px;overflow:hidden;" -->
-            <a class="btn" href="${rootURL}/${job.wsurl}/GoIbiboGenFw/target/site/allure-maven-plugin/index.html" style="float:left;">Detailed Reports </a>
-            <a class="btn" href="${resURL}/${job.wsurl}" style="float:left;"> Screenshots </a>
+            <a class="btn" href="${rootURL}/${job.url}/artifact/build/reports/tests/index.html" style="float:left;">Detailed Reports </a>
+            <a class="btn" href="${resURL}/${job.url}" style="float:left;"> Screenshots </a>
             <a class="btn" href="${rootURL}/${job.url}/console" style="float:left;">Console</a>
         </div>
     </div>
