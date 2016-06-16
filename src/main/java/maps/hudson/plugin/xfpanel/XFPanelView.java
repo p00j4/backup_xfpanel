@@ -77,10 +77,10 @@ public class XFPanelView extends ListView {
     private String responsiblesTopic = "Responsible(s): ";
     private String lastBuildTimePreFix = "last successful: ";
 
-    private String successfulBuildColor = "#7E7EFF";
+    private String successfulBuildColor = "#078A35";
     private String unstableBuildColor = "#FFC130";
     private String brokenBuildColor = "#FF0000";
-    private String otherBuildColor = "#CCCCCC";
+    private String otherBuildColor = "#B5B5B5";
     private String buildFontColor = "#FFFFFF";
     
 		private String jobNameReplaceRegExp;
@@ -226,7 +226,7 @@ public class XFPanelView extends ListView {
         return defaultColor;
     }
     public String getSuccessfulBuildColor(){
-        return validateColor( successfulBuildColor, "7E7EFF");
+        return validateColor( successfulBuildColor, "078A35");
     }
     public String getUnstableBuildColor(){
         return validateColor( unstableBuildColor, "FFC130");
@@ -235,7 +235,7 @@ public class XFPanelView extends ListView {
         return validateColor( brokenBuildColor, "FF0000");
     }
     public String getOtherBuildColor(){
-        return validateColor( otherBuildColor, "CCCCCC");
+        return validateColor( otherBuildColor, "B5B5B5");
     }
     public String getBuildFontColor(){
         return validateColor( buildFontColor, "FFFFFF");
@@ -712,7 +712,7 @@ public static final class XFPanelColors {
     }
 
     public static final XFPanelColors DEFAULT = 
-        new XFPanelColors("#7E7EFF", "#FFFFFF", "#FFC130", "#FFFFFF", "#FF0000", "#FFFFFF", "#CCCCCC", "#FFFFFF");
+        new XFPanelColors("#078A35", "#FFFFFF", "#FFC130", "#FFFFFF", "#FF0000", "#FFFFFF", "#A7A7A7", "#FFFFFF");
      /* okBG , okFG , failedBG , failedFG , brokenBG , brokenFG , otherBG ,
      * otherFG FFFFFF = white FF0000 = red 7E7EFF = blue FFC130 = yellow
      * 215E21 = huntergreen #267526 = another green

@@ -75,7 +75,7 @@ public class XFPanelEntryTest {
 		
 		XFPanelEntry xfPanelEntry = new XFPanelEntry(view, job);
 		PowerMock.replayAll();
-		assertEquals("JOBNAME_SUFFIX", xfPanelEntry.getName());
+		assertEquals("JOBNAME_SUFFIX".toLowerCase(), xfPanelEntry.getName().toLowerCase());
 		
 	}
 

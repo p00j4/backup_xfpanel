@@ -1,5 +1,16 @@
 package maps.hudson.plugin.xfpanel;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
+
 import hudson.Functions;
 import hudson.Plugin;
 import hudson.model.Result;
@@ -79,7 +90,7 @@ public final class XFPanelEntry {
             }
             label = pattern.matcher(label).replaceAll(getView().getJobNameReplacement());
         }
-        label = label.toUpperCase();
+        label = label;//.toUpperCase();
         if (getView().getShowDescription() == true && !job.getDescription().isEmpty()) {
             label += ": " + job.getDescription();
         }
@@ -621,5 +632,115 @@ public final class XFPanelEntry {
 			return view;
 		}
 
+    
+    
+    /*** Pooja -- start **/
+    public String getEnv() throws IOException {
+		String pageUrl = this.job.getAbsoluteUrl()+"/lastBuild"+"/parameters/";   //getUrl() wont work because Pagesource doesnt work on partial url
+		if(StringUtils.isEmpty(pageUrl))
+			return "in getAbEnv, null/empty pageUrl";
+		String pageSource = getPageSource(pageUrl);
+		if(StringUtils.isEmpty(pageSource))
+			return "in getAbEnv, null/empty pageSource";
+		String regExEnv = "<td class=\"setting-name\">env<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+		String env = getStringAfterPattern(pageSource, regExEnv, 1);
+		
+		return env;
+
+	}
+   
+  
+   
+  
+   
+   public String getCurrentTag(){
+	   String pageUrl = this.job.getAbsoluteUrl()+"/lastBuild"+"/parameters/";   //getUrl() wont work because Pagesource doesnt work on partial url
+	   if(StringUtils.isEmpty(pageUrl))
+		   return "in curent tag, null/empty pageUrl";
+	   String pageSource;
+	   String tag;
+	   try {
+		   pageSource = getPageSource(pageUrl);
+
+		   if(StringUtils.isEmpty(pageSource))
+			   return "in curent tag, null/empty pageSource";
+		   String regExEnv = "<td class=\"setting-name\">tagtotest<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+		   tag = getStringAfterPattern(pageSource, regExEnv, 1);
+
+		   return tag;
+	   } catch (Exception e) {
+		   // TODO Auto-generated catch block
+		   tag= e.getMessage();
+	   }
+	return tag;
+ }
+
+	public String getLastSucceedNo(){
+		return String.valueOf(this.job.getLastStableBuild().getNumber());
+		
+	}
+	
+	public String getLastSucceedTag() throws IOException {
+		int lastSuccessfulNo = this.job.getLastStableBuild().getNumber();
+		if(lastSuccessfulNo<=0)
+			return "no successful build";
+		
+			String pageUrl = this.job.getAbsoluteUrl()+ "/"
+					+ this.job.getLastStableBuild().getNumber()
+					+ "/parameters/";
+			String pageSource = getPageSource(pageUrl);
+			String regExTag = "<td class=\"setting-name\">tagtotest<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+			String tag = getStringAfterPattern(pageSource, regExTag, 1);
+			
+			String regExEnv = "<td class=\"setting-name\">env<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+			String env = getStringAfterPattern(pageSource, regExEnv, 1);
+            tag =StringUtils.isEmpty(tag)?"":"last working tag : "+tag+" on env : "+env;
+			return tag;
+	}
+    
+    public  String getStringAfterPattern(String sentence, String pattern,
+			int groupIndex) {
+		String str = "";
+		Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(sentence);
+		while (m.find()) {
+			str = m.group(groupIndex);
+			//System.out.println("found-" + str); // for try
+		}
+		return str.trim();
+	}
+    
+    private static String getPageSource(String urlStr) throws IOException {
+//		String username = "";
+//        String password = "";
+
+        URL url = new URL(urlStr);
+
+        URLConnection conn = url.openConnection();
+        
+//        String userpass = username + ":" + password;
+//        String basicAuth = "Basic " + new String(new Base64().encode(userpass.getBytes()));
+//        conn.setRequestProperty ("Authorization", basicAuth);
+        
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				conn.getInputStream(), "UTF-8"));
+		String inputLine;
+		StringBuilder a = new StringBuilder();
+		while ((inputLine = in.readLine()) != null)
+			a.append(inputLine);
+		in.close();
+
+		return a.toString();
+	}
+    /**
+     * @return the URL for the workspace
+     */
+    public String getWsurl() {
+        return this.job.getUrl() + "ws";
+        
+    }
+
+   /*** Pooja -- end **/
 
 }
