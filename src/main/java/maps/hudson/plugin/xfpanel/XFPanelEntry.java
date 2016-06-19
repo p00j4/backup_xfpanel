@@ -642,7 +642,7 @@ public final class XFPanelEntry {
 		 String pageSource = getPageSource(pageUrl);
 		 if(StringUtils.isEmpty(pageSource))
 			 return "in getAbEnv, null/empty pageSource";
-		 String regExEnv = "<td class=\"setting-name\">env<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+		 String regExEnv = "<td class=\"setting-name\">test_environment<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
 		 String env = getStringAfterPattern(pageSource, regExEnv, 1);
 
 		 return env;
@@ -660,7 +660,7 @@ public final class XFPanelEntry {
 			 pageSource = getPageSource(pageUrl);
 			 if(StringUtils.isEmpty(pageSource))
 				 return "in curent tag, null/empty pageSource";
-			 String regExEnv = "<td class=\"setting-name\">tagtotest<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+			 String regExEnv = "<td class=\"setting-name\">dev_code_version<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
 			 tag = getStringAfterPattern(pageSource, regExEnv, 1);
 			 //System.out.println("Tag name="+tag);
 			 return tag;
@@ -688,9 +688,9 @@ public final class XFPanelEntry {
 		 String regExTag = "<td class=\"setting-name\">tagtotest<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
 		 String tag = getStringAfterPattern(pageSource, regExTag, 1);
 
-		 String regExEnv = "<td class=\"setting-name\">env<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
+		 String regExEnv = "<td class=\"setting-name\">dev_code_version<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
 		 String env = getStringAfterPattern(pageSource, regExEnv, 1);
-		 tag =StringUtils.isEmpty(tag)?"":"last working tag : "+tag+" on env : "+env;
+		 tag =StringUtils.isEmpty(tag)?"":"last succeful dev_code_version : "+tag+" on test_environment : "+env;
 		 return tag;
 	 }
 
