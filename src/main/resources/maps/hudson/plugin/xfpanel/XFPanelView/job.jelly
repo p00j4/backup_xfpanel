@@ -15,19 +15,22 @@
     <j:set var="claimTopMargin" value="${from.guiFailFont*0.2}px" />
     <!-- JOB div -->
     <!--div id="div-1" align="center" style="width:${width}; height:260%; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}"-->
-    <div id="div-1" align="center" style="width:${width}; height:260px; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}">
+    <div id="div-1" align="center" style="width:${width}; height:270px; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}">
         <div class="tagsParent">
             <!--pooja -->
             <div class="tag">
-                <span class="tagLabel">Tag tested : </span>
-                <span class="tagValue">${job.currentTag}</span>
+               	<span class="tagLabel">Version </span>
+               	<span class="tagValue">${job.currentTag}</span>
+            	<j:if test="${job.lastSucceedTag != ''}">
+			<span style="float:right;padding-right: 30px;">
+                		<span class="tagLabel">Last stable </span>
+                		<span class="tagValue">${job.lastSucceedTag}</span>
+			</span>
+            	</j:if>
             </div>
             <div class="tag">
-                <span class="tagLabel">On env : </span>
+                <span class="tagLabel">Environment </span>
                 <span class="tagValue">${job.env}</span>
-            </div>
-            <div class="tag">
-                <span class="tagLabel">${job.lastSucceedTag}</span>
             </div>
         </div>
         <a href="${rootURL}/${job.url}" style="font-style:normal; font-weight:bold; height:${height};">
@@ -95,12 +98,10 @@
                     <!-- Topic bar -->
                     <!--div class="fadeHiddenText" style ="font-size: ${jobFont};"-->
                     <div class="fadeHiddenText" style ="font-size: 30px;">
-                        <span>
-                            <u>${job.name}</u>
-                        </span>
+                        <span>${job.name}</span>
                     </div>
                     <!-- Plain text bar -->
-                    <div valign="top" >
+                    <div valign="top" style="margin: 12px;">
                         <j:if test="${job.building == false}">
                             <!--div  class="fadeHiddenText" style="font-size: ${infoFont};"-->
                             <div  class="fadeHiddenText" style="font-size: 20px;">
@@ -126,7 +127,7 @@
                 </div>
             </div>
         </a>
-        <div id="div-4" style="">
+        <div id="div-4" style="padding: 10px 0px 10px 50px;">
             <!--div style="margin:5px;background:#aaa;border-radius:40px;overflow:hidden;" -->
             <a class="btn" href="${rootURL}/${job.url}/artifact/build/reports/tests/index.html" style="float:left;">Detailed Reports </a>
             <a class="btn" href="${resURL}/${job.url}" style="float:left;"> Screenshots </a>

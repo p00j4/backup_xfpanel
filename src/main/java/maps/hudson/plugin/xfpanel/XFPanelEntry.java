@@ -690,7 +690,7 @@ public final class XFPanelEntry {
 
 		 String regExEnv = "<td class=\"setting-name\">dev_code_version<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
 		 String env = getStringAfterPattern(pageSource, regExEnv, 1);
-		 tag =StringUtils.isEmpty(tag)?"":"last succeful dev_code_version : "+tag+" on test_environment : "+env;
+		 tag =StringUtils.isEmpty(tag)?"": tag;
 		 return tag;
 	 }
 
