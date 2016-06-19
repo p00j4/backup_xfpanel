@@ -56,6 +56,7 @@ public final class XFPanelEntry {
 	private String completionTimestampString = "";
 	private Calendar completionTimestamp;
 	private XFPanelView view;
+	private String lastSuccessfulTestEnvironment;
 
 	/**
 	 * C'tor
@@ -689,11 +690,16 @@ public final class XFPanelEntry {
 		 String tag = getStringAfterPattern(pageSource, regExTag, 1);
 
 		 String regExEnv = "<td class=\"setting-name\">dev_code_version<\\/td>[\\s\\S]*?value=\"([\\s\\S]*?)\"";
-		 String env = getStringAfterPattern(pageSource, regExEnv, 1);
+		 lastSuccessfulTestEnvironment = getStringAfterPattern(pageSource, regExEnv, 1);
 		 tag =StringUtils.isEmpty(tag)?"": tag;
 		 return tag;
 	 }
 
+	 
+	 public String getLastSuccessEnvrionment(){
+		 return lastSuccessfulTestEnvironment;
+	 }
+	 
 	 public  String getStringAfterPattern(String sentence, String pattern,
 			 int groupIndex) {
 		 String str = "";

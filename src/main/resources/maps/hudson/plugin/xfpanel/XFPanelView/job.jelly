@@ -22,15 +22,21 @@
                	<span class="tagLabel">Version </span>
                	<span class="tagValue">${job.currentTag}</span>
             	<j:if test="${job.lastSucceedTag != ''}">
-			<span style="float:right;padding-right: 30px;">
+			        <span style="float:right;padding-right: 30px;">
                 		<span class="tagLabel">Last stable </span>
                 		<span class="tagValue">${job.lastSucceedTag}</span>
-			</span>
+			        </span>
             	</j:if>
             </div>
             <div class="tag">
                 <span class="tagLabel">Environment </span>
                 <span class="tagValue">${job.env}</span>
+                
+                <j:if test="${job.lastSucceedTag != ''}">
+                    <span style="float:right;padding-right: 30px;">
+                        <span class="tagValue">${job.lastSuccessEnvrionment}</span>
+                    </span>
+            	</j:if>
             </div>
         </div>
         <a href="${rootURL}/${job.url}" style="font-style:normal; font-weight:bold; height:${height};">
