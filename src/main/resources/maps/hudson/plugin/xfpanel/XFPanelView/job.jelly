@@ -14,7 +14,8 @@
     <j:set var="claimFont" value="${from.guiClaimFont}px" />
     <j:set var="claimTopMargin" value="${from.guiFailFont*0.2}px" />
     <!-- JOB div -->
-    <div id="div-1" align="center" style="width:${width}; height:260%; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}">
+    <!--div id="div-1" align="center" style="width:${width}; height:260%; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}"-->
+    <div id="div-1" align="center" style="width:${width}; height:260px; float: ${float}; border-radius:15px;margin: 4px; background-color:${job.backgroundColor}; -moz-border-radius:10px;" tooltip="${job.name}">
         <div class="tagsParent">
             <!--pooja -->
             <div class="tag">
@@ -92,7 +93,8 @@
                 <!-- Left side bar -->
                 <div id="div-3" style="margin:1%;width: 80%; height:100%; white-space: nowrap; overflow:hidden;  color: ${job.color};" >
                     <!-- Topic bar -->
-                    <div class="fadeHiddenText" style ="font-size: ${jobFont};">
+                    <!--div class="fadeHiddenText" style ="font-size: ${jobFont};"-->
+                    <div class="fadeHiddenText" style ="font-size: 30px;">
                         <span>
                             <u>${job.name}</u>
                         </span>
@@ -100,12 +102,14 @@
                     <!-- Plain text bar -->
                     <div valign="top" >
                         <j:if test="${job.building == false}">
-                            <div  class="fadeHiddenText" style="font-size: ${infoFont};">
+                            <!--div  class="fadeHiddenText" style="font-size: ${infoFont};"-->
+                            <div  class="fadeHiddenText" style="font-size: 20px;">
                                 <st:include page="notBuilding.jelly" />
                             </div>
                         </j:if>
                         <j:if test="${job.building == true}">
-                            <div class="fadeHiddenText" style="font-size: ${buildFont};">
+                            <!--div class="fadeHiddenText" style="font-size: ${buildFont};"-->
+                            <div class="fadeHiddenText" style="font-size: 20px;">
                                 <st:include page="building.jelly" />
                             </div>
                         </j:if>
